@@ -9,25 +9,28 @@ import (
 )
 
 func main() {
-	path := os.Args[1]
-	data, _ := os.ReadFile(path)
+	data, _ := os.ReadFile(os.Args[1])
 	input := strings.TrimSpace(string(data))
-	fmt.Println(p(input, 1))
-	fmt.Println(p(input, 2))
-	fmt.Println(p(input, 3))
+
+	switch os.Args[2] {
+	case "1":
+		fmt.Println(p(input, 1))
+	case "2":
+		fmt.Println(p(input, 2))
+	case "3":
+		fmt.Println(p(input, 3))
+	}
 }
 
 func p(input string, part int) string {
 	lines := strings.Split(input, "\n")
 
-	track := ""
+	track := "="
 	switch part {
-	case 1:
-		track = "="
 	case 2:
 		track = readTrack("S-=++=-==++=++=-=+=-=+=+=--=-=++=-==++=-+=-=+=-=+=+=++=-+==++=++=-=-=--\n-                                                                     -\n=                                                                     =\n+                                                                     +\n=                                                                     +\n+                                                                     =\n=                                                                     =\n-                                                                     -\n--==++++==+=+++-=+=-=+=-+-=+-=+-=+=-=+=--=+++=++=+++==++==--=+=++==+++-")
 	case 3:
-		track = bfsTrack("S+= +=-== +=++=     =+=+=--=    =-= ++=     +=-  =+=++=-+==+ =++=-=-=--\n- + +   + =   =     =      =   == = - -     - =  =         =-=        -\n= + + +-- =-= ==-==-= --++ +  == == = +     - =  =    ==++=    =++=-=++\n+ + + =     +         =  + + == == ++ =     = =  ==   =   = =++=       \n= = + + +== +==     =++ == =+=  =  +  +==-=++ =   =++ --= + =          \n+ ==- = + =   = =+= =   =       ++--          +     =   = = =--= ==++==\n=     ==- ==+-- = = = ++= +=--      ==+ ==--= +--+=-= ==- ==   =+=    =\n-               = = = =   +  +  ==+ = = +   =        ++    =          -\n-               = + + =   +  -  = + = = +   =        +     =          -\n--==++++==+=+++-= =-= =-+-=  =+-= =-= =--   +=++=+++==     -=+=++==+++-")
+		track = readTrack("S+= +=-== +=++=     =+=+=--=    =-= ++=     +=-  =+=++=-+==+ =++=-=-=--\n- + +   + =   =     =      =   == = - -     - =  =         =-=        -\n= + + +-- =-= ==-==-= --++ +  == == = +     - =  =    ==++=    =++=-=++\n+ + + =     +         =  + + == == ++ =     = =  ==   =   = =++=       \n= = + + +== +==     =++ == =+=  =  +  +==-=++ =   =++ --= + =          \n+ ==- = + =   = =+= =   =       ++--          +     =   = = =--= ==++==\n=     ==- ==+-- = = = ++= +=--      ==+ ==--= +--+=-= ==- ==   =+=    =\n-               = = = =   +  +  ==+ = = +   =        ++    =          -\n-               = + + =   +  -  = + = = +   =        +     =          -\n--==++++==+=+++-= =-= =-+-=  =+-= =-= =--   +=++=+++==     -=+=++==+++-")
 	}
 
 	loops := 10
@@ -104,24 +107,6 @@ func sim(track string, loops int, plan string) int {
 	return score
 }
 
-func readTrack(track string) string {
-	rows := strings.Split(track, "\n")
-	R, C := len(rows), len(rows[0])
-
-	tmp := rows[0][1:]
-	for i := 1; i < R; i++ {
-		tmp += string(rows[i][C-1])
-	}
-	for i := C - 2; i >= 0; i-- {
-		tmp += string(rows[R-1][i])
-	}
-	for i := R - 2; i >= 0; i-- {
-		tmp += string(rows[i][0])
-	}
-
-	return tmp
-}
-
 type pt [2]int
 
 func pop[T any](slice *[]T) T {
@@ -134,7 +119,7 @@ func pop[T any](slice *[]T) T {
 	return back
 }
 
-func bfsTrack(track string) string {
+func readTrack(track string) string {
 	rows := strings.Split(track, "\n")
 	R, C := len(rows), len(rows[0])
 	t := ""
