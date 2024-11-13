@@ -87,19 +87,15 @@ func sim(track string, loops int, plan string) int {
 		switch track[i%l] {
 		case '+':
 			s++
-			score += s
-			continue
 		case '-':
 			s--
-			score += s
-			continue
-		}
-		op := plan[i%len(plan)]
-		switch op {
-		case '+':
-			s++
-		case '-':
-			s--
+		default:
+			switch plan[i%len(plan)] {
+			case '+':
+				s++
+			case '-':
+				s--
+			}
 		}
 		score += s
 	}
