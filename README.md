@@ -1,2 +1,2 @@
 # everybody-codes
-everybody codes solutions
+everybody.codes solutions

@@ -8,13 +8,17 @@ import (
 )
 
 func main() {
-	path := os.Args[1]
-	data, _ := os.ReadFile(path)
+	data, _ := os.ReadFile(os.Args[1])
 	input := strings.TrimSpace(string(data))
 
-	fmt.Println(p(input, true))
-	fmt.Println(p(input, false))
-	fmt.Println(p(input, false))
+	switch os.Args[2] {
+	case "1":
+		fmt.Println(p(input, true))
+	case "2":
+		fmt.Println(p(input, false))
+	case "3":
+		fmt.Println(p(input, false))
+	}
 }
 
 func p(input string, p1 bool) string {

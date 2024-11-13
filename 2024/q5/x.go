@@ -10,13 +10,17 @@ import (
 )
 
 func main() {
-	path := os.Args[1]
-	data, _ := os.ReadFile(path)
+	data, _ := os.ReadFile(os.Args[1])
 	input := strings.TrimSpace(string(data))
 
-	fmt.Println(p(input, 1))
-	fmt.Println(p(input, 2))
-	fmt.Println(p(input, 3))
+	switch os.Args[2] {
+	case "1":
+		fmt.Println(p(input, 1))
+	case "2":
+		fmt.Println(p(input, 2))
+	case "3":
+		fmt.Println(p(input, 3))
+	}
 }
 
 func p(input string, part int) int {

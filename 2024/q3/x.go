@@ -7,13 +7,17 @@ import (
 )
 
 func main() {
-	path := os.Args[1]
-	data, _ := os.ReadFile(path)
+	data, _ := os.ReadFile(os.Args[1])
 	input := strings.TrimSpace(string(data))
 
-	fmt.Println(p(input, neighbors, false))
-	fmt.Println(p(input, neighbors, false))
-	fmt.Println(p(input, neighbors8, true))
+	switch os.Args[2] {
+	case "1":
+		fmt.Println(p(input, neighbors, false))
+	case "2":
+		fmt.Println(p(input, neighbors, false))
+	case "3":
+		fmt.Println(p(input, neighbors8, true))
+	}
 }
 
 func p(input string, nbrFunc func(int, int, int, int) []pt, pad bool) int {
