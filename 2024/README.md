@@ -10,6 +10,7 @@ quest    part 1    part 2    part 3
 05       0.165 ms  366.3 ms  0.687 ms
 06       0.252 ms  0.638 ms  3.831 ms
 07       0.087 ms  0.214 ms  1337. ms
+08       0.081 ms  0.067 ms  40.19 ms
 ```
 
 Run as:
