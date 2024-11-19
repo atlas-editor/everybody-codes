@@ -32,11 +32,18 @@ func main() {
 }
 
 func p3(rules map[string][]string) int {
-	max_, min_ := 0, 1<<62
+	c := make(chan int)
 	for t := range rules {
-		s := simulate(map[string]int{t: 1}, rules, 20)
-		max_ = max(max_, s)
-		min_ = min(min_, s)
+		go func() {
+			c <- simulate(map[string]int{t: 1}, rules, 20)
+		}()
+	}
+
+	max_, min_ := 0, 1<<62
+	for range len(rules) {
+		n := <-c
+		max_ = max(max_, n)
+		min_ = min(min_, n)
 	}
 
 	return max_ - min_
